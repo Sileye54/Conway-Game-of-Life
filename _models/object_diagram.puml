@@ -1,0 +1,7 @@
+@startuml
+
+note
+    No objects involved, only a static call.
+end note
+
+@enduml

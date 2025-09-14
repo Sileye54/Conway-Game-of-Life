@@ -1,0 +1,7 @@
+@startuml
+
+class Conway {
+	+ {static} main(args: String[])
+}
+
+@enduml
