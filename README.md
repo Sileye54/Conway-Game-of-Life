@@ -1,6 +1,6 @@
 # TP 1 - Conway (Fiche de réponses)
 
-  - Auteur : Prénom, Nom (`Code permanent`)
+  - Auteur : Sileye Lamine, Guisse (`GUIS08369403`)
   - Date de remise : JJ/MM/AAAA
   - Estimation du temps de travail passé sur le projet : _xx_ heures.
 
@@ -10,7 +10,7 @@ Les tailles de réponses sont données à titre indicatif, mais il est clair qu'
  
 ### Question 1: Évolution du code légataire
 
-_Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum._
+_Notre jeu implémente bel et bien la règle du jeu de la vie. Dans le code source du programme, entre les lignes 50 et 61, on comptabilise le nombre de voisins en vie de chaque case dans la variable n. Entre les lignes 62 et 66, on attribue l'état d'une case en fonction de son état et du nombre de voisins en vie, conformément à la règle. De plus, avec les exemples fournis dans le projet et d'autres que l'on peut créer, on obtient le résultat attendu après exécution du programme._
 
 ### Question 2: Analyse des défauts du code légataire
 
