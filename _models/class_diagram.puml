@@ -4,37 +4,41 @@ class Conway {
 	+ {static} main(args: String[])
 }
 
-abstract Case{
-
+abstract Cell{
+	-posX: int
+	-posY: int
+	+isStateSwitching(): Boolean
+	+switchState()
+	
 }
 abstract GameArguments{
-	loadArguments(args: String[])
+	-nbIteration: int
+	+loadArguments(args: String[])
 }
 
 abstract Board{
-	printBoard()
-	createBoard()
-	getNeighbors(cell:Cell): Cell [][]
-	simulate()
+	-boardData: GameArguments
+	+printBoard()
+	+createBoard()
+	+simulate()
 }
 
 
-class Cell{
-	isStateSwitching(): Boolean
-	switchState(): 
+class ConwayCell{
+	-Neighbors: Cell [][]
 }
 
 class ConwayGameArguments{
-
+	+getNeighbors(cell:Cell): Cell [][]
 }
 
 class ConwayBoard{
 
 }
-Case <|-- Cell
+Cell <|-- ConwayCell
 GameArguments <|-- ConwayGameArguments
 Board <|-- ConwayBoard
-Case"1..*"<--* "1" Board
+Cell"1..*"<--* "1" Board
 Board --> GameArguments
 Conway --> Board
 

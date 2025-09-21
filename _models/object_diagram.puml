@@ -1,7 +1,11 @@
 @startuml
 
-note
-    No objects involved, only a static call.
-end note
+object "conway: ConwayCell" as cell
+object "conwayBoard: ConwayBoard" as board
+object "conwayArgument: ConwayArgument" as arguments
+object " " as main
+main --> board
+board --> arguments
+board "1" *--> "1..*" cell
 
 @enduml
