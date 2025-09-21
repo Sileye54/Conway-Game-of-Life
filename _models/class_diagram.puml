@@ -4,4 +4,38 @@ class Conway {
 	+ {static} main(args: String[])
 }
 
+abstract Case{
+
+}
+abstract GameArguments{
+	loadArguments(args: String[])
+}
+
+abstract Board{
+	printBoard()
+	createBoard()
+	getNeighbors(cell:Cell): Cell [][]
+	simulate()
+}
+
+
+class Cell{
+	isStateSwitching(): Boolean
+	switchState(): 
+}
+
+class ConwayGameArguments{
+
+}
+
+class ConwayBoard{
+
+}
+Case <|-- Cell
+GameArguments <|-- ConwayGameArguments
+Board <|-- ConwayBoard
+Case"1..*"<--* "1" Board
+Board --> GameArguments
+Conway --> Board
+
 @enduml
