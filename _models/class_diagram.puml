@@ -1,45 +1,47 @@
 @startuml
 
 class Conway {
-	+ {static} main(args: String[])
+  + {static} main(args: String[])
+  + createBoard(): ConwayBoard
 }
 
-abstract Cell{
-	-posX: int
-	-posY: int
-	+isStateSwitching(): Boolean
-	+switchState()
-	
-}
-abstract GameArguments{
-	-nbIteration: int
-	+loadArguments(args: String[])
+interface Cell {
+  + isStateSwitching(): Boolean
+  + switchState()
 }
 
-abstract Board{
-	-boardData: GameArguments
-	+printBoard()
-	+createBoard()
-	+simulate()
+interface Board {
+  + printBoard()
 }
 
-
-class ConwayCell{
-	-Neighbors: Cell [][]
+interface Simulator {
+  + simulate(board: ConwayBoard)
 }
 
-class ConwayGameArguments{
-	+getNeighbors(cell:Cell): Cell [][]
+class ConwayCell {
+  - neighbors: Cell[]
+  + isStateSwitching(): Boolean
+  + switchState()
 }
 
-class ConwayBoard{
-
+class ConwayBoard {
+  - cells: ConwayCell[][]
+  + printBoard()
+  + getNeighbors(cell: Cell): Cell[]
 }
+
+class ConwaySimulator {
+  + simulate(board: ConwayBoard)
+}
+
+Conway *--> ConwayBoard
+Conway *--> ConwaySimulator
+
 Cell <|-- ConwayCell
-GameArguments <|-- ConwayGameArguments
 Board <|-- ConwayBoard
-Cell"1..*"<--* "1" Board
-Board --> GameArguments
-Conway --> Board
+Simulator <|-- ConwaySimulator
+
+ConwayBoard *--> "1..*" ConwayCell
+ConwaySimulator --> ConwayBoard
 
 @enduml

@@ -1,11 +1,15 @@
 @startuml
-
-object "conway: ConwayCell" as cell
+object "conway: Conway" as conway
 object "conwayBoard: ConwayBoard" as board
-object "conwayArgument: ConwayArgument" as arguments
-object " " as main
-main --> board
-board --> arguments
-board "1" *--> "1..*" cell
+object "conwaySimulator: ConwaySimulator" as simulator
+object "conwayCell1: ConwayCell" as c1
+object "conwayCell2: ConwayCell" as c2
+object "conwayCell3: ConwayCell" as c3
 
+conway *--> board
+conway *--> simulator
+simulator ..> board
+board *-- c1
+board *-- c2
+board *-- c3
 @enduml
