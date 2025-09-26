@@ -18,6 +18,14 @@ interface Simulator {
   + simulate(board: ConwayBoard)
 }
 
+interface GameArguments{
+	+ loadArguments()
+	+ getArguments(): GameData
+}
+abstract GameData{
+
+}
+
 class ConwayCell {
   - neighbors: Cell[]
   + isStateSwitching(): Boolean
@@ -33,14 +41,24 @@ class ConwayBoard {
 class ConwaySimulator {
   + simulate(board: ConwayBoard)
 }
+class ConwayGameData{
+
+}
+
+class ConwayGameArguments{
+	+ loadArguments()
+	+ getArguments(): GameData
+}
 
 Conway *--> ConwayBoard
 Conway *--> ConwaySimulator
-
+Conway --> ConwayGameArguments
+ConwayGameArguments *--> ConwayGameData
 Cell <|-- ConwayCell
 Board <|-- ConwayBoard
 Simulator <|-- ConwaySimulator
-
+GameArguments <|-- ConwayGameArguments
+GameData <|-- ConwayGameData
 ConwayBoard *--> "1..*" ConwayCell
 ConwaySimulator --> ConwayBoard
 
