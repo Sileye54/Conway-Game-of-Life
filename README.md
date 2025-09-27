@@ -14,8 +14,8 @@ _Notre jeu implémente bel et bien la règle du jeu de la vie. Dans le code sour
 
 ### Question 2: Analyse des défauts du code légataire
 
-_La classe principale, qui contient tout le code source, peut être divisée en plusieurs classes et modules pour rendre le code plus lisible et plus facile à maintenir.
-Les exceptions attrapées avec try/catch pourraient être plus spécifiques. En cas d'erreur, le programme se termine sans message indiquant la source de l'erreur, comme on peut le voir aux lignes 21 et 42. On constate également que si la taille du plateau fourni est différente de celle du plateau en format texte, l'erreur n'est pas gérée par le système._
+_La classe principale, qui contient tout le code source, peut être divisée en plusieurs classes et modules afin de rendre le code plus lisible et plus facile à maintenir.
+Les exceptions attrapées avec try/catch pourraient être plus spécifiques. En cas d'erreur, le programme se termine sans message indiquant la source de l'erreur, comme on peut le voir aux lignes 21 et 42. On constate également que si la taille du plateau fourni est différente de celle du plateau en format texte et que le nombre de colonnes des lignes peut être différent.
 
 Les variables cnt, f, r, d, gs, ns et n pourraient avoir des noms plus significatifs. L'initialisation de la variable cnt à -1 n'a aucun sens. On trouve également des bouts de code redondants qui pourraient être implémentés dans des fonctions. Par exemple, le code entre les lignes 51 et 53 est le même que celui entre les lignes 55 et 57._
 
