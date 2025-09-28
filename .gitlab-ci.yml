@@ -47,6 +47,22 @@ test-job:
     reports:
       junit: target/surefire-reports/TEST-*.xml
 
+integration-test-job:
+  stage: verify
+  script:
+    - echo "Exécution des tests d'intégrations (phase verify)"
+    - mvn org.jacoco:jacoco-maven-plugin:0.8.12:prepare-agent test
+    - mvn org.jacoco:jacoco-maven-plugin:0.8.12:report
+    - cat target/site/jacoco/index.html | grep -o 'Total[^%]*%' | sed 's/<.*>/ /; s/Total/Jacoco Coverage Total:/'
+  coverage: '/Total.*?([0-9]{1,3})%/'
+  artifacts:
+    when: always
+    paths:
+      - target/site/jacoco/
+    reports:
+      junit: target/surefire-reports/TEST-*.xml
+
+
 package-job:
   stage: package
   script:
