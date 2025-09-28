@@ -1,29 +1,24 @@
 @startuml
 
 class Conway {
-  + {static} main(args: String[])
-  + createBoard(): ConwayBoard
+  + run(args: String[])
 }
 
-interface Cell {
+abstract Cell {
   + isStateSwitching(): Boolean
   + switchState()
 }
 
-interface Board {
+abstract Board {
   + printBoard()
 }
 
-interface Simulator {
+abstract Simulator {
   + simulate(board: ConwayBoard)
 }
 
-interface GameArguments{
+abstract GameArguments{
 	+ loadArguments()
-	+ getArguments(): GameData
-}
-abstract GameData{
-
 }
 
 class ConwayCell {
@@ -41,24 +36,19 @@ class ConwayBoard {
 class ConwaySimulator {
   + simulate(board: ConwayBoard)
 }
-class ConwayGameData{
-
-}
 
 class ConwayGameArguments{
 	+ loadArguments()
-	+ getArguments(): GameData
 }
 
 Conway *--> ConwayBoard
 Conway *--> ConwaySimulator
-Conway --> ConwayGameArguments
-ConwayGameArguments *--> ConwayGameData
+Conway *--> ConwayGameArguments
 Cell <|-- ConwayCell
 Board <|-- ConwayBoard
 Simulator <|-- ConwaySimulator
 GameArguments <|-- ConwayGameArguments
-GameData <|-- ConwayGameData
+ConwayBoard --> ConwayGameArguments
 ConwayBoard *--> "1..*" ConwayCell
 ConwaySimulator --> ConwayBoard
 
