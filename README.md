@@ -14,19 +14,18 @@ _Notre jeu implémente bel et bien la règle du jeu de la vie. Dans le code sour
 
 ### Question 2: Analyse des défauts du code légataire
 
-_La classe principale, qui contient tout le code source, peut être divisée en plusieurs classes et modules afin de rendre le code plus lisible et plus facile à maintenir.
-Les exceptions attrapées avec try/catch pourraient être plus spécifiques. En cas d'erreur, le programme se termine sans message indiquant la source de l'erreur, comme on peut le voir aux lignes 21 et 42. On constate également que si la taille du plateau fourni est différente de celle du plateau en format texte et que le nombre de colonnes des lignes peut être différent.
+_La classe principale, qui contient tout le code source, peut être divisée en plusieurs classes et modules afin de rendre le code plus lisible et plus facile à maintenir.Les exceptions attrapées avec try/catch pourraient être plus spécifiques. En cas d'erreur, le programme se termine sans message indiquant la source de l'erreur, comme on peut le voir aux lignes 21 et 42. On constate également que si la taille du plateau fourni est différente de celle du plateau en format texte et que le nombre de colonnes des lignes peut être différent.
 
 Les variables cnt, f, r, d, gs, ns et n pourraient avoir des noms plus significatifs. L'initialisation de la variable cnt à -1 n'a aucun sens. On trouve également des bouts de code redondants qui pourraient être implémentés dans des fonctions. Par exemple, le code entre les lignes 51 et 53 est le même que celui entre les lignes 55 et 57._
 
 
 ### Question 3: Justification des choix de conception
 
-_Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum._
+_Nous avons proposé un modèle de conception qui découpe la classe Main en plusieurs classes ayant chacune une tâche précise et unique, ce qui offre une meilleure maintenabilité, une meilleure compréhension du code et une plus grande flexibilité en cas d'ajout de nouvelles fonctionnalités. Ce nouveau modèle offre également une meilleure gestion des erreurs, avec la création de classes d'exception spécifiques à chaque type d'erreur, accompagnées d'un message explicatif précis._
 
-_Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum._
+_Chaque classe n'a qu'une seule responsabilité : par exemple, la classe ConwayGameArguments ne s'occupe que des arguments fournis, et la classe ConwaySimulator a pour seule tâche de simuler le jeu de la vie de Conway ce qui montre une forte cohesion de chaque classe. Chaque classe est soit une sous-classe d'une classe abstraite, soit une implémentation d'une interface, ce qui permet d'ajouter de nouvelles fonctionnalités sans modifier les classes existantes._
 
-_Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum._
+_Enfin, l’interaction entre les classes est volontairement limitée : chaque classe communique uniquement avec celles dont elle dépend directement, et en utilisant un minimum d’informations. Cette faible dépendance favorise un couplage réduit, ce qui améliore la modularité et la réutilisabilité du code._
 
 ### Question 4: Évolution du code objet
 
