@@ -1,13 +1,76 @@
 @startuml
 
 hide footbox
-
-participant "Conway" as C
-
-[-> C: main(args: String[])
-activate C
-    ...
-    [<-- C:
-deactivate C
+participant "Conway" as conway
+[-> conway: run(args: String[])
+activate conway
+    create participant "ConwayGameArguments" as args
+    conway -> args: loadArguments(args: String[])
+    activate args
+    args -> args: extractNumberOfIteration(args[1])
+    args -> args: extractBoardStructure(args[0])
+    args --> conway
+    deactivate args
+    conway -> args: getNumberOfIterations(): int
+    activate args
+    args --> conway: int
+    deactivate args
+    conway -> args: getBoardStructure(): char[][]
+    activate args
+    args --> conway: char[][]
+    deactivate args
+    create participant "ConwayBoard" as board
+    conway -> board: initializeBoard(boardStructure: char[][])
+    activate board
+    loop for each cell in boardStructure
+        create participant "ConwayCell" as cell
+        board -> cell: ConwayCell(int x, int y)
+        activate cell
+        cell --> board
+        deactivate cell
+        board -> cell: setState(boolean state)
+        activate cell
+        cell --> board
+        deactivate cell
+    end
+    board --> conway: 
+    deactivate board
+    create participant "ConwaySimulator" as simulator
+    conway -> simulator: simulate(board: ConwayBoard, numberOfIterations: int)
+    activate simulator
+    loop for i = 1 to numberOfIterations
+        simulator -> board: copy(): ConwayBoard
+        activate board
+        board --> simulator: ConwayBoard
+        deactivate board
+        loop for each cell in board
+            simulator -> board: getNeighbors(cell: Cell): Cell[]
+            activate board
+            board --> simulator: Cell[]
+            deactivate board
+            simulator -> cell: isStateSwitching(): boolean
+            activate cell
+            cell --> simulator: boolean
+            deactivate cell
+            alt if state is switching
+                simulator -> cell: switchState()
+                activate cell
+                cell --> simulator
+                deactivate cell
+            end
+        end
+        simulator -> board: setBoard(newBoard: ConwayBoard)
+        activate board
+        board --> simulator
+        deactivate board
+    end
+    simulator --> conway:
+    deactivate simulator
+    conway -> board: printBoard()
+    activate board
+    board --> conway
+    deactivate board
+    [<-- conway:
+deactivate conway
 
 @enduml
