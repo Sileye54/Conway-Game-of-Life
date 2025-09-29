@@ -10,11 +10,11 @@ public class ConwayBoard extends Board {
     private ConwayCell[][] board;
 
     /**
-     * Constructs a ConwayBoard from a given board structure.
+     * Initializes a ConwayBoard from a given board structure.
      * 
      * @param boardStructure 2D array representing the initial state of the board
      */
-    public ConwayBoard(char[][] boardStructure) {
+    public void initializeBoard(char[][] boardStructure) {
         int boardSize = boardStructure.length;
         board = new ConwayCell[boardSize][boardSize];
         for (int i = 0; i < boardSize; i++) {
@@ -111,6 +111,7 @@ public class ConwayBoard extends Board {
      * @return a new ConwayBoard instance that is a copy of the current board
      */
     public ConwayBoard copy() {
+        ConwayBoard copy = new ConwayBoard();
         int boardSize = this.board.length;
         char[][] boardStructure = new char[boardSize][boardSize];
         for (int i = 0; i < boardSize; i++) {
@@ -118,6 +119,7 @@ public class ConwayBoard extends Board {
                 boardStructure[i][j] = this.board[i][j].getState() ? 'X' : '_';
             }
         }
-        return new ConwayBoard(boardStructure);
+        copy.initializeBoard(boardStructure);
+        return copy;
     }
 }
