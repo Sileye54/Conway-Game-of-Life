@@ -14,10 +14,9 @@ _Notre jeu implémente bel et bien la règle du jeu de la vie. Dans le code sour
 
 ### Question 2: Analyse des défauts du code légataire
 
-_La classe principale, qui contient tout le code source, peut être divisée en plusieurs classes et modules afin de rendre le code plus lisible et plus facile à maintenir.Les exceptions attrapées avec try/catch pourraient être plus spécifiques. En cas d'erreur, le programme se termine sans message indiquant la source de l'erreur, comme on peut le voir aux lignes 21 et 42. On constate également que si la taille du plateau fourni est différente de celle du plateau en format texte et que le nombre de colonnes des lignes peut être différent.
+_La classe principale, qui contient tout le code source, peut être divisée en plusieurs classes et modules afin de rendre le code plus lisible et plus facile à maintenir.Les exceptions attrapées avec try/catch pourraient être plus spécifiques. En cas d'erreur, le programme se termine sans message indiquant la source de l'erreur, comme on peut le voir aux lignes 21 et 42. On constate également que si la taille du plateau fourni est différente de celle du plateau en format texte et que le nombre de colonnes des lignes peut être différent_.
 
-Les variables cnt, f, r, d, gs, ns et n pourraient avoir des noms plus significatifs. L'initialisation de la variable cnt à -1 n'a aucun sens. On trouve également des bouts de code redondants qui pourraient être implémentés dans des fonctions. Par exemple, le code entre les lignes 51 et 53 est le même que celui entre les lignes 55 et 57._
-
+_Les variables cnt, f, r, d, gs, ns et n pourraient avoir des noms plus significatifs. L'initialisation de la variable cnt à -1 n'a aucun sens. On trouve également des bouts de code redondants qui pourraient être implémentés dans des fonctions. Par exemple, le code entre les lignes 51 et 53 est le même que celui entre les lignes 55 et 57._
 
 ### Question 3: Justification des choix de conception
 
@@ -29,7 +28,8 @@ _Enfin, l’interaction entre les classes est volontairement limitée : chaque c
 
 ### Question 4: Évolution du code objet
 
-_Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum._
+_Notre conception du jeu de la vie de Conway permet effectivement de simuler le comportement de la fourmi de Langton. Dans ce jeu, une fourmi se déplace en fonction de la couleur de la case dans laquelle elle se trouve, qui est soit noire, soit blanche, puis change la couleur de la case après s'être déplacée.
+Pour implémenter ce modèle, on peut créer une classe fille pour chaque classe mère du jeu de la vie (Cell, Board et GameArguments), avec une implémentation propre à la logique des fourmis de Langton, sans pour autant modifier les classes propres au jeu de Conway._
 
 ## Auto-évaluation (optionnelle)
 
