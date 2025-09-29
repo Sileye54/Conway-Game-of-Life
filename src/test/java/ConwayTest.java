@@ -152,7 +152,8 @@ public class ConwayTest {
     ConwayGameArguments conwayGameArguments = new ConwayGameArguments();
     try {
       conwayGameArguments.loadArguments(new String[] { filePath, "6" });
-      ConwayBoard conwayBoard = new ConwayBoard(conwayGameArguments.getBoardStructure());
+      ConwayBoard conwayBoard = new ConwayBoard();
+      conwayBoard.initializeBoard(conwayGameArguments.getBoardStructure());
       ConwayBoard initialBoard = conwayBoard.copy();
       ConwaySimulator conwaySimulator = new ConwaySimulator();
       conwaySimulator.simulate(conwayBoard, conwayGameArguments.getNumberOfIterations());
