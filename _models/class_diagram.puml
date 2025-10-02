@@ -1,7 +1,8 @@
 @startuml
 
 class Conway {
-  + run(args: String[])
+  + initializeGame(args: String[])
+  + run()
 }
 
 abstract Cell {
@@ -20,9 +21,17 @@ abstract Simulator {
 abstract GameArguments{
 	+ loadArguments()
 }
+Class Position {
+  - x: int
+  - y: int
+}
+
+enum CellState {
+  ALIVE
+  DEAD
+}
 
 class ConwayCell {
-  - neighbors: Cell[]
   + isStateSwitching(): Boolean
   + switchState()
 }
@@ -30,7 +39,7 @@ class ConwayCell {
 class ConwayBoard {
   - cells: ConwayCell[][]
   + printBoard()
-  + getNeighbors(cell: Cell): Cell[]
+  + getNeighborState(cell: Cell): Cell[]
 }
 
 class ConwaySimulator {
@@ -51,5 +60,7 @@ GameArguments <|-- ConwayGameArguments
 ConwayBoard --> ConwayGameArguments
 ConwayBoard *--> "1..*" ConwayCell
 ConwaySimulator --> ConwayBoard
+ConwayCell --> Position
+ConwayCell --> CellState
 
 @enduml

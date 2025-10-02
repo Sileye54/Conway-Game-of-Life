@@ -6,19 +6,31 @@ public class Conway {
    * 
    * @param args command line arguments
    */
-  public static void run(String[] args) {
-    ConwayGameArguments conwayGameArguments = new ConwayGameArguments();
+  private ConwayGameArguments conwayGameArguments;
+
+  private ConwayBoard conwayBoard;
+
+  public void initializeGame(String[] args) throws Exception {
+    conwayGameArguments = new ConwayGameArguments();
+    conwayGameArguments.loadArguments(args);
+    char[][] boardStructure = conwayGameArguments.getBoardStructure();
+    conwayBoard = new ConwayBoard();
+    conwayBoard.initializeBoard(boardStructure);
+
+  }
+
+  public void run() {
+
     try {
-      conwayGameArguments.loadArguments(args);
-      char[][] boardStructure = conwayGameArguments.getBoardStructure();
-      int numberOfIterations = conwayGameArguments.getNumberOfIterations();
-      ConwayBoard conwayBoard = new ConwayBoard();
-      conwayBoard.initializeBoard(boardStructure);
+
       ConwaySimulator conwaySimulator = new ConwaySimulator();
+      int numberOfIterations = conwayGameArguments.getNumberOfIterations();
+
       conwaySimulator.simulate(conwayBoard, numberOfIterations);
       conwayBoard.printBoard();
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
   }
+
 }

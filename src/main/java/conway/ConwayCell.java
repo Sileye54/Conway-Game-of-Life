@@ -5,9 +5,8 @@ import java.util.List;
 
 /** Represents a cell in Conway's Game of Life */
 public class ConwayCell extends Cell {
-    private int posX;
-    private int posY;
-    private boolean alive;
+    private Position position;
+    private CellState state;
 
     /**
      * Constructs a ConwayCell at the given position.
@@ -15,10 +14,9 @@ public class ConwayCell extends Cell {
      * @param posX the x-coordinate of the cell
      * @param posY the y-coordinate of the cell
      */
-    public ConwayCell(int posX, int posY) {
-        this.posX = posX;
-        this.posY = posY;
-        this.alive = false;
+    public ConwayCell(Position position, CellState state) {
+        this.position = position;
+        this.state = state;
     }
 
     /**
@@ -27,12 +25,12 @@ public class ConwayCell extends Cell {
      * @param neighbors list of boolean states of neighboring cells
      * @return true if the cell's state should switch, false otherwise
      */
-    public boolean isStateSwitching(List<Boolean> neighbors) {
-        int neighborsAlive = Collections.frequency(neighbors, true);
-        if (alive && (neighborsAlive > 3 || neighborsAlive < 2)) {
+    public boolean isStateSwitching(List<CellState> neighbors) {
+        int neighborsAlive = Collections.frequency(neighbors, CellState.ALIVE);
+        if (state == CellState.ALIVE && (neighborsAlive > 3 || neighborsAlive < 2)) {
             return true;
         }
-        if (!alive && neighborsAlive == 3) {
+        if (state == CellState.DEAD && neighborsAlive == 3) {
             return true;
         }
         return false;
@@ -40,34 +38,19 @@ public class ConwayCell extends Cell {
 
     @Override
     public void switchState() {
-        alive = !alive;
+        if (state == CellState.ALIVE) {
+            state = CellState.DEAD;
+        } else {
+            state = CellState.ALIVE;
+        }
     }
 
     /**
-     * Sets the state of the cell.
-     * 
-     * @param alive true if the cell is alive, false if it is dead
+     * Gets the position of the cell.
+     * @return
      */
-    public void setState(boolean alive) {
-        this.alive = alive;
-    }
-
-    /**
-     * Gets the x-coordinate of the cell.
-     * 
-     * @return x-coordinate of the cell
-     */
-    public int getPosX() {
-        return posX;
-    }
-
-    /**
-     * Gets the y-coordinate of the cell.
-     * 
-     * @return y-coordinate of the cell
-     */
-    public int getPosY() {
-        return posY;
+    public Position getPosition() {
+        return position;
     }
 
     /**
@@ -75,8 +58,8 @@ public class ConwayCell extends Cell {
      * 
      * @return true if the cell is alive, false if it is dead
      */
-    public boolean getState() {
-        return alive;
+    public CellState getState() {
+        return state;
     }
 
 }

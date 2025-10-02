@@ -12,7 +12,7 @@ public class ConwaySimulator implements Simulator<ConwayBoard> {
             ConwayCell[][] newBoard = conwayBoard.copy().getBoard();
             for (int x = 0; x < board.length; x++) {
                 for (int y = 0; y < board[x].length; y++) {
-                    if (board[x][y].isStateSwitching(conwayBoard.getNeighborCells(board[x][y]))) {
+                    if (board[x][y].isStateSwitching(conwayBoard.getNeighborCellStates(board[x][y]))) {
                         newBoard[x][y].switchState();
                     }
                 }

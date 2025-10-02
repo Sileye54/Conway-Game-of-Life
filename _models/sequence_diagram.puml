@@ -2,7 +2,7 @@
 
 hide footbox
 participant "Conway" as conway
-[-> conway: run(args: String[])
+[-> conway: initializeGame(args: String[])
 activate conway
     create participant "ConwayGameArguments" as args
     conway -> args: loadArguments(args: String[])
@@ -10,10 +10,6 @@ activate conway
     args -> args: extractNumberOfIteration(args[1])
     args -> args: extractBoardStructure(args[0])
     args --> conway
-    deactivate args
-    conway -> args: getNumberOfIterations(): int
-    activate args
-    args --> conway: int
     deactivate args
     conway -> args: getBoardStructure(): char[][]
     activate args
@@ -33,8 +29,16 @@ activate conway
         cell --> board
         deactivate cell
     end
-    board --> conway: 
-    deactivate board
+    board --> conway:  
+    deactivate board 
+    [<-- conway:
+    deactivate conway
+    [-> conway: run()
+    activate conway
+    conway -> args: getNumberOfIterations(): int
+    activate args
+    args --> conway: int
+    deactivate args
     create participant "ConwaySimulator" as simulator
     conway -> simulator: simulate(board: ConwayBoard, numberOfIterations: int)
     activate simulator
@@ -44,12 +48,12 @@ activate conway
         board --> simulator: ConwayBoard
         deactivate board
         loop for each cell in board
-            simulator -> board: getNeighbors(cell: Cell): Cell[]
+            simulator -> board: getNeighborStates(cell: Cell): List<CellState>
             activate board
-            board --> simulator: Cell[]
+            board --> simulator: List<CellState>
             deactivate board
             simulator -> cell: isStateSwitching(): boolean
-            activate cell
+            activate cell   
             cell --> simulator: boolean
             deactivate cell
             alt if state is switching

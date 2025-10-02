@@ -19,8 +19,9 @@ public class ConwayBoard extends Board {
         board = new ConwayCell[boardSize][boardSize];
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
-                board[i][j] = new ConwayCell(i, j);
-                board[i][j].setState(boardStructure[i][j] == 'X');
+                Position position = new Position(i, j);
+                CellState state = boardStructure[i][j] == 'X' ? CellState.ALIVE : CellState.DEAD;
+                board[i][j] = new ConwayCell(position, state);
             }
         }
     }
@@ -30,7 +31,7 @@ public class ConwayBoard extends Board {
         System.out.println(board.length);
         for (int x = 0; x < board.length; x++) {
             for (int y = 0; y < board[x].length; y++) {
-                if (board[x][y].getState()) {
+                if (board[x][y].getState() == CellState.ALIVE) {
                     System.out.print("X");
                 } else {
                     System.out.print("_");
@@ -47,12 +48,13 @@ public class ConwayBoard extends Board {
      * @param Conwaycell the cell whose neighbors are to be found
      * @return list of boolean states of the neighboring cells
      */
-    public List<Boolean> getNeighborCells(ConwayCell Conwaycell) {
-        List<Boolean> neighborsCells = new ArrayList<>();
+    public List<CellState> getNeighborCellStates(ConwayCell Conwaycell) {
+        List<CellState> neighborsCells = new ArrayList<>();
         int rows = board.length;
         int cols = board[0].length;
-        int posX = Conwaycell.getPosX();
-        int posY = Conwaycell.getPosY();
+        Position position = Conwaycell.getPosition();
+        int posX = position.getX();
+        int posY = position.getY();
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
                 if (i == 0 && j == 0)
@@ -116,7 +118,7 @@ public class ConwayBoard extends Board {
         char[][] boardStructure = new char[boardSize][boardSize];
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
-                boardStructure[i][j] = this.board[i][j].getState() ? 'X' : '_';
+                boardStructure[i][j] = this.board[i][j].getState() == CellState.ALIVE ? 'X' : '_';
             }
         }
         copy.initializeBoard(boardStructure);
