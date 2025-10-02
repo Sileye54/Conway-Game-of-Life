@@ -12,25 +12,19 @@ public class Conway {
 
   public void initializeGame(String[] args) throws Exception {
     conwayGameArguments = new ConwayGameArguments();
-    conwayGameArguments.loadArguments(args);
-    char[][] boardStructure = conwayGameArguments.getBoardStructure();
     conwayBoard = new ConwayBoard();
-    conwayBoard.initializeBoard(boardStructure);
+    conwayBoard.initializeBoard(conwayGameArguments);
 
   }
 
   public void run() {
 
     try {
-
-      ConwaySimulator conwaySimulator = new ConwaySimulator();
-      int numberOfIterations = conwayGameArguments.getNumberOfIterations();
-
-      conwaySimulator.simulate(conwayBoard, numberOfIterations);
-      conwayBoard.printBoard();
+      conwayBoard.simulate();
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
+    conwayBoard.printBoard();
   }
 
 }

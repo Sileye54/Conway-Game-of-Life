@@ -11,20 +11,12 @@ activate conway
     args -> args: extractBoardStructure(args[0])
     args --> conway
     deactivate args
-    conway -> args: getBoardStructure(): char[][]
-    activate args
-    args --> conway: char[][]
-    deactivate args
     create participant "ConwayBoard" as board
-    conway -> board: initializeBoard(boardStructure: char[][])
+    conway -> board: initializeBoard(GameArguments args)
     activate board
     loop for each cell in boardStructure
         create participant "ConwayCell" as cell
-        board -> cell: ConwayCell(int x, int y)
-        activate cell
-        cell --> board
-        deactivate cell
-        board -> cell: setState(boolean state)
+        board -> cell: ConwayCell(Position position, CellState state)
         activate cell
         cell --> board
         deactivate cell
@@ -35,41 +27,36 @@ activate conway
     deactivate conway
     [-> conway: run()
     activate conway
-    conway -> args: getNumberOfIterations(): int
-    activate args
-    args --> conway: int
-    deactivate args
-    create participant "ConwaySimulator" as simulator
-    conway -> simulator: simulate(board: ConwayBoard, numberOfIterations: int)
-    activate simulator
-    loop for i = 1 to numberOfIterations
-        simulator -> board: copy(): ConwayBoard
+    conway -> board: simulate()
+    activate board
+    loop for i = 0 to numberOfIterations
+        board -> board: copy(): ConwayBoard
         activate board
-        board --> simulator: ConwayBoard
+        board --> board: ConwayBoard
         deactivate board
         loop for each cell in board
-            simulator -> board: getNeighborStates(cell: Cell): List<CellState>
+            board -> board: getNeighborStates(cell: Cell): List<CellState>
             activate board
-            board --> simulator: List<CellState>
+            board --> board: List<CellState>
             deactivate board
-            simulator -> cell: isStateSwitching(): boolean
-            activate cell   
-            cell --> simulator: boolean
+            board -> cell: isStateSwitching(): boolean
+            activate cell
+            cell --> board: boolean
             deactivate cell
             alt if state is switching
-                simulator -> cell: switchState()
+                board -> cell: switchState()
                 activate cell
-                cell --> simulator
+                cell --> board
                 deactivate cell
             end
         end
-        simulator -> board: setBoard(newBoard: ConwayBoard)
+        board -> board: setBoard(newBoard: ConwayBoard)
         activate board
-        board --> simulator
+        board --> board 
         deactivate board
     end
-    simulator --> conway:
-    deactivate simulator
+    board --> conway:
+    deactivate board
     conway -> board: printBoard()
     activate board
     board --> conway

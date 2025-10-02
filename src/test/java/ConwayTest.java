@@ -8,7 +8,6 @@ import java.util.Arrays;
 
 import conway.ConwayBoard;
 import conway.ConwayGameArguments;
-import conway.ConwaySimulator;
 import conway.InvalidBoardSizeFormatException;
 import conway.InvalidBoardFormatException;
 import conway.InvalidIterationException;
@@ -153,10 +152,9 @@ public class ConwayTest {
     try {
       conwayGameArguments.loadArguments(new String[] { filePath, "6" });
       ConwayBoard conwayBoard = new ConwayBoard();
-      conwayBoard.initializeBoard(conwayGameArguments.getBoardStructure());
+      conwayBoard.initializeBoard(conwayGameArguments);
       ConwayBoard initialBoard = conwayBoard.copy();
-      ConwaySimulator conwaySimulator = new ConwaySimulator();
-      conwaySimulator.simulate(conwayBoard, conwayGameArguments.getNumberOfIterations());
+      conwayBoard.simulate();
       assertTrue(initialBoard.isEqual(conwayBoard));
     } catch (Exception e) {
       fail();

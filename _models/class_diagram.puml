@@ -12,10 +12,7 @@ abstract Cell {
 
 abstract Board {
   + printBoard()
-}
-
-abstract Simulator {
-  + simulate(board: ConwayBoard)
+  + simulate()
 }
 
 abstract GameArguments{
@@ -39,27 +36,22 @@ class ConwayCell {
 class ConwayBoard {
   - cells: ConwayCell[][]
   + printBoard()
+  + simulate()
   + getNeighborState(cell: Cell): Cell[]
 }
 
-class ConwaySimulator {
-  + simulate(board: ConwayBoard)
-}
 
 class ConwayGameArguments{
 	+ loadArguments()
 }
 
 Conway *--> ConwayBoard
-Conway *--> ConwaySimulator
 Conway *--> ConwayGameArguments
 Cell <|-- ConwayCell
 Board <|-- ConwayBoard
-Simulator <|-- ConwaySimulator
 GameArguments <|-- ConwayGameArguments
 ConwayBoard --> ConwayGameArguments
 ConwayBoard *--> "1..*" ConwayCell
-ConwaySimulator --> ConwayBoard
 ConwayCell --> Position
 ConwayCell --> CellState
 

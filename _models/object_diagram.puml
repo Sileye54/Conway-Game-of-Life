@@ -1,17 +1,14 @@
 @startuml
 object "conway: Conway" as conway
 object "conwayBoard: ConwayBoard" as board
-object "conwaySimulator: ConwaySimulator" as simulator
 object "conwayGameArguments: ConwayGameArguments" as args
 object "conwayCell1: ConwayCell" as c1
 object "conwayCell2: ConwayCell" as c2
 object "conwayCell3: ConwayCell" as c3
 
 conway *--> board
-conway *--> simulator
-conway --> args
-simulator --> board
-args --> board
+conway *--> args
+board --> args
 board *-- c1
 board *-- c2
 board *-- c3

@@ -8,13 +8,16 @@ import java.util.List;
  */
 public class ConwayBoard extends Board {
     private ConwayCell[][] board;
+    private int numberOfIterations;
 
     /**
      * Initializes a ConwayBoard from a given board structure.
      * 
      * @param boardStructure 2D array representing the initial state of the board
      */
-    public void initializeBoard(char[][] boardStructure) {
+    public void initializeBoard(ConwayGameArguments conwayGameArguments) {
+        char[][] boardStructure = conwayGameArguments.getBoardStructure();
+        numberOfIterations = conwayGameArguments.getNumberOfIterations();
         int boardSize = boardStructure.length;
         board = new ConwayCell[boardSize][boardSize];
         for (int i = 0; i < boardSize; i++) {
@@ -23,6 +26,21 @@ public class ConwayBoard extends Board {
                 CellState state = boardStructure[i][j] == 'X' ? CellState.ALIVE : CellState.DEAD;
                 board[i][j] = new ConwayCell(position, state);
             }
+        }
+
+    }
+    @Override
+    public void simulate() {
+        for (int i = 0; i < numberOfIterations; i++) {
+            ConwayCell[][] newBoard = copy().getBoard();
+            for (int x = 0; x < board.length; x++) {
+                for (int y = 0; y < board[x].length; y++) {
+                    if (board[x][y].isStateSwitching(this.getNeighborCellStates(board[x][y]))) {
+                        newBoard[x][y].switchState();
+                    }
+                }
+            }
+            board = newBoard;
         }
     }
 
@@ -113,15 +131,17 @@ public class ConwayBoard extends Board {
      * @return a new ConwayBoard instance that is a copy of the current board
      */
     public ConwayBoard copy() {
-        ConwayBoard copy = new ConwayBoard();
         int boardSize = this.board.length;
-        char[][] boardStructure = new char[boardSize][boardSize];
+        ConwayBoard copy = new ConwayBoard();
+        ConwayCell[][] newBoard = new ConwayCell[boardSize][boardSize];
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
-                boardStructure[i][j] = this.board[i][j].getState() == CellState.ALIVE ? 'X' : '_';
+                Position position = new Position(i, j);
+                CellState state = this.board[i][j].getState();
+                newBoard[i][j] = new ConwayCell(position, state);
             }
         }
-        copy.initializeBoard(boardStructure);
+        copy.setBoard(newBoard);
         return copy;
     }
 }
