@@ -1,8 +1,8 @@
 # TP 1 - Conway (Fiche de réponses)
 
   - Auteur : Sileye Lamine, Guisse (`GUIS08369403`)
-  - Date de remise : JJ/MM/AAAA
-  - Estimation du temps de travail passé sur le projet : _xx_ heures.
+  - Date de remise : 04/10/2025
+  - Estimation du temps de travail passé sur le projet : 17 heures.
 
 ## Réponses aux questions  
  

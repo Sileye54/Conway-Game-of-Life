@@ -12,6 +12,7 @@ public class Conway {
 
   public void initializeGame(String[] args) throws Exception {
     conwayGameArguments = new ConwayGameArguments();
+    conwayGameArguments.loadArguments(args);
     conwayBoard = new ConwayBoard();
     conwayBoard.initializeBoard(conwayGameArguments);
 

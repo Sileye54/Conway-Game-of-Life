@@ -37,7 +37,7 @@ class ConwayBoard {
   - cells: ConwayCell[][]
   + printBoard()
   + simulate()
-  + getNeighborState(cell: Cell): Cell[]
+  + getNeighborCellState(cell: Cell): Cell[]
 }
 
 
